@@ -12,6 +12,10 @@ app.controller('ProjectCtrl', function($scope, $http, socket){
     socket.emit('message', {text: $scope.yourName});
   };
 
+  $scope.doStuff = function(){
+    $scope.foo='do stuff';
+  };
+
   $scope.$on('$destroy', function (event) {
      console.log('&&&&&&&&&&&&&&&&&&&  destroy');
      socket.removeListener(this);
