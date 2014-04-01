@@ -16,4 +16,10 @@ module.exports = function (socket) {
          message: data.text
       });
    });
+
+   // clean up when a user leaves, and broadcast it to other users
+   socket.on('disconnect', function () {
+      socket.broadcast.emit('user:left');
+  });
+
 };

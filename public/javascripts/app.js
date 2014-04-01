@@ -12,6 +12,11 @@ app.controller('ProjectCtrl', function($scope, $http, socket){
     socket.emit('message', {text: $scope.yourName});
   };
 
+  $scope.$on('$destroy', function (event) {
+     console.log('&&&&&&&&&&&&&&&&&&&  destroy');
+     socket.removeListener(this);
+  });
+
   $http.get('/stuff').success(function(data) {
     $scope.stuff = data;
   });
@@ -34,6 +39,11 @@ app.controller('ProjectCtrl', function($scope, $http, socket){
     console.log(data);
     $scope.messages.push(data.message);
   });
+
+  socket.on('user:left', function (data) {
+    console.log('--=-=-=- user:left', data);
+  });
+
 });
 
 
